@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selamat Paskah </title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#FFF9F0;--warm:#FFF0E8;--peach:#F4A261;--rust:#C1541E;
+  --dark:#2D1A0E;--mid:#B07050;--lite:#D4856A;--sky:#8ECAE6;
+  --lav:#DDA0DD;--teal:#A8DADC;
+  --green:#2D6A4F;--green-lite:#D8F3DC;--green-mid:#52B788;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);font-family:'Lato',sans-serif;color:var(--dark);min-height:100vh;overflow-x:hidden}
+
+/* PETALS */
+.petal{position:fixed;border-radius:50% 50% 50% 0;opacity:0.4;animation:falling linear infinite;pointer-events:none;z-index:0}
+@keyframes falling{0%{transform:translateY(-40px) rotate(0deg);opacity:.5}100%{transform:translateY(110vh) rotate(360deg);opacity:0}}
+
+/* ──  NAME ENTRY ── */
+#landing{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:60px 24px;position:relative;z-index:10;
+}
+.land-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--lite);margin-bottom:20px;animation:fadeUp .8s ease both}
+.land-title{font-family:'Playfair Display',serif;font-size:clamp(44px,9vw,84px);font-weight:700;line-height:1.1;color:var(--dark);margin-bottom:12px;animation:fadeUp .9s .1s ease both}
+.land-title .acc{color:var(--rust)}
+.land-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(16px,3.5vw,22px);color:var(--mid);margin-bottom:48px;animation:fadeUp .9s .2s ease both}
+
+.name-box{
+  background:white;border:1px solid rgba(212,133,106,.25);border-radius:24px;
+  padding:36px 32px 32px;max-width:440px;width:100%;
+  box-shadow:0 12px 48px rgba(193,84,30,.08);
+  animation:fadeUp .9s .3s ease both;
+}
+.name-box label{display:block;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--lite);margin-bottom:10px}
+
+.name-input-wrap{position:relative;margin-bottom:8px}
+.name-input{
+  width:100%;padding:14px 18px;border:1.5px solid rgba(212,133,106,.3);
+  border-radius:12px;font-size:16px;font-family:'Lato',sans-serif;
+  color:var(--dark);background:#FFFAF7;outline:none;transition:border-color .2s;
+}
+.name-input:focus{border-color:var(--rust)}
+.name-input.error{border-color:#E24B4A;animation:shake .35s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+
+.err-msg{font-size:12px;color:#A32D2D;letter-spacing:.3px;min-height:18px;margin-bottom:14px;text-align:left}
+
+.submit-btn{
+  width:100%;padding:14px;background:var(--rust);border:none;border-radius:12px;
+  color:white;font-size:15px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  font-family:'Lato',sans-serif;cursor:pointer;transition:all .2s;
+}
+.submit-btn:hover{background:#A04018;transform:translateY(-1px)}
+.submit-btn:active{transform:translateY(0) scale(.98)}
+
+.hint-note{font-size:11px;color:var(--mid);margin-top:14px;line-height:1.6;opacity:.75}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MAIN CONTENT ── */
+#main-content{display:none}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;display:flex;justify-content:center;
+  gap:4px;padding:12px 20px;
+  background:rgba(255,249,240,.93);backdrop-filter:blur(8px);
+  border-bottom:1px solid rgba(212,133,106,.15);
+}
+.nav-pill{
+  padding:7px 18px;border-radius:50px;border:1px solid rgba(212,133,106,.35);
+  background:transparent;color:var(--mid);font-size:12px;letter-spacing:1.5px;
+  text-transform:uppercase;font-family:'Lato',sans-serif;font-weight:700;
+  cursor:pointer;transition:all .2s;text-decoration:none;
+}
+.nav-pill:hover,.nav-pill.active{background:var(--rust);border-color:var(--rust);color:white}
+
+/* HERO */
+#hero{
+  min-height:92vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:60px 24px 80px;position:relative;z-index:10;
+}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--lite);margin-bottom:20px;animation:fadeUp .8s ease both}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(44px,9vw,84px);font-weight:700;line-height:1.1;color:var(--dark);margin-bottom:12px;animation:fadeUp .9s .1s ease both}
+.hero-title .acc{color:var(--rust)}
+.hero-sub{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(17px,3.5vw,24px);color:var(--mid);animation:fadeUp .9s .2s ease both}
+.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--lite);font-size:11px;letter-spacing:2px;text-transform:uppercase;animation:sbounce 2s ease infinite}
+.scroll-hint::after{content:'';display:block;width:1px;height:38px;background:linear-gradient(to bottom,var(--lite),transparent)}
+@keyframes sbounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* SECTION BASE */
+section.content-sec{padding:80px 24px;position:relative;z-index:10}
+.sec-label{text-align:center;font-size:11px;font-weight:700;letter-spacing:4px;text-transform:uppercase;color:var(--lite);margin-bottom:14px}
+.sec-title{text-align:center;font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,40px);font-weight:700;color:var(--dark);margin-bottom:40px}
+.sec-title .acc{color:var(--rust)}
+
+/* ── EGGS ── */
+#eggs{background:var(--warm)}
+.eggs-row{display:flex;justify-content:center;gap:clamp(12px,3vw,28px);flex-wrap:wrap;margin-bottom:28px}
+.egg-wrapper{display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform .25s;position:relative}
+.egg-wrapper:hover:not(.cracked){transform:translateY(-8px) scale(1.05)}
+.egg-wrapper.cracked{cursor:default;animation:crackBounce .45s ease}
+@keyframes crackBounce{0%{transform:scale(1)}30%{transform:scale(1.22) rotate(-8deg)}65%{transform:scale(.94) rotate(4deg)}100%{transform:scale(1) rotate(0)}}
+.egg-svg{width:clamp(58px,11vw,76px);height:auto;display:block}
+.egg-label{font-size:10px;color:var(--lite);margin-top:8px;font-weight:700;letter-spacing:1px;text-transform:uppercase;opacity:0;transition:opacity .4s}
+.egg-wrapper.cracked .egg-label{opacity:1}
+.msg-box{max-width:520px;margin:0 auto 20px;background:white;border:1px dashed rgba(212,133,106,.45);border-radius:18px;padding:22px 26px;font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(14px,2.4vw,16px);color:#5A2E10;line-height:1.85;text-align:center;transition:all .35s;min-height:88px;display:flex;align-items:center;justify-content:center}
+.msg-box.lit{border-color:var(--lite);background:#FFFBF8}
+.dots{display:flex;justify-content:center;gap:8px;margin-top:10px}
+.dot{width:8px;height:8px;border-radius:50%;background:#F0C8B0;transition:background .3s,transform .3s}
+.dot.on{background:var(--rust);transform:scale(1.25)}
+.final-egg{display:none;flex-direction:column;align-items:center;gap:18px;text-align:center;padding:0 20px}
+.final-egg.show{display:flex;animation:fadeUp .8s ease both}
+.final-flower{font-size:52px;animation:hbeat 1.4s ease infinite}
+@keyframes hbeat{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+.final-text{font-family:'Playfair Display',serif;font-size:clamp(17px,3vw,21px);color:var(--dark);line-height:1.7}
+.final-text strong{color:var(--rust)}
+.restart-btn{background:none;border:1px solid var(--lite);color:var(--lite);padding:10px 28px;border-radius:50px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-family:'Lato',sans-serif;font-weight:700;cursor:pointer;transition:all .2s}
+.restart-btn:hover{background:var(--lite);color:white}
+
+
+#verses{background:var(--cream)}
+.verse-nav{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.vtab{padding:8px 16px;border-radius:50px;border:1px solid rgba(212,133,106,.35);background:transparent;color:var(--mid);font-size:12px;letter-spacing:1px;font-family:'Lato',sans-serif;font-weight:700;cursor:pointer;transition:all .2s;text-transform:uppercase}
+.vtab.active,.vtab:hover{background:var(--rust);border-color:var(--rust);color:white}
+.verse-card{max-width:580px;margin:0 auto;background:white;border-radius:22px;border:1px solid rgba(212,133,106,.18);padding:34px 30px 30px;position:relative;overflow:hidden;transition:opacity .3s,transform .3s}
+.vrainbow{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#F4A261,#C1541E,#8ECAE6,#DDA0DD,#A8DADC)}
+.vtag{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--rust);margin-bottom:12px;display:block}
+.vref{font-family:'Playfair Display',serif;font-style:italic;font-size:13px;color:var(--mid);margin-bottom:12px}
+.vbody{font-family:'Playfair Display',serif;font-size:clamp(16px,2.7vw,20px);line-height:1.8;color:var(--dark);margin-bottom:22px}
+.vbody em{color:var(--rust);font-style:italic}
+.vrefl{border-left:3px solid var(--peach);padding:10px 16px;background:#FFF8F4;border-radius:0 8px 8px 0}
+.refl-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--rust);margin-bottom:5px}
+.refl-body{font-size:13px;color:var(--mid);line-height:1.75}
+.varrows{display:flex;justify-content:space-between;align-items:center;margin-top:18px;max-width:580px;margin-left:auto;margin-right:auto}
+.varr{background:white;border:1px solid rgba(212,133,106,.35);border-radius:50%;width:36px;height:36px;font-size:16px;cursor:pointer;color:var(--mid);display:flex;align-items:center;justify-content:center;transition:all .2s}
+.varr:hover{background:var(--rust);color:white;border-color:var(--rust)}
+.varr:disabled{opacity:.25;cursor:default}
+.varr:disabled:hover{background:white;color:var(--mid);border-color:rgba(212,133,106,.35)}
+.vcounter{font-size:12px;color:var(--lite);letter-spacing:1.5px}
+
+/* ── versi islam ── */
+#muslim-page{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;z-index:10;background:var(--cream)}
+.muslim-card{background:white;border-radius:28px;padding:44px 36px;max-width:480px;width:100%;border:1px solid rgba(82,183,136,.25);box-shadow:0 16px 56px rgba(45,106,79,.08);animation:fadeUp .8s ease both}
+.muslim-emoji{font-size:56px;margin-bottom:20px;animation:hbeat 1.5s ease infinite}
+.muslim-title{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,32px);font-weight:700;color:#2D6A4F;margin-bottom:10px}
+.muslim-roast{font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(15px,3vw,18px);color:#52B788;margin-bottom:24px;line-height:1.6}
+.muslim-msg{font-size:14px;color:#52B788;line-height:1.8;background:#D8F3DC;border-radius:14px;padding:18px 20px;margin-bottom:24px}
+.muslim-msg strong{color:#2D6A4F}
+.back-btn{background:none;border:1px solid #52B788;color:#52B788;padding:11px 30px;border-radius:50px;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-family:'Lato',sans-serif;font-weight:700;cursor:pointer;transition:all .2s}
+.back-btn:hover{background:#52B788;color:white}
+
+/* FOOTER */
+footer{padding:44px 24px;text-align:center;background:var(--dark);color:rgba(255,255,255,.45);font-size:13px;letter-spacing:1px;position:relative;z-index:10}
+footer span{color:rgba(244,162,97,.8)}
+
+/* CONFETTI */
+.cf{position:fixed;width:9px;height:9px;border-radius:2px;pointer-events:none;z-index:9999;animation:cfFall 2s ease-out forwards}
+@keyframes cfFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(320px) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- PETALS -->
+<!-- LANDING -->
+<div id="landing">
+  <p class="land-eyebrow">✦ Greeting Paskah Spesial ✦</p>
+  <h1 class="land-title">Happy<br><span class="acc">Easter</span> </h1>
+  <p class="land-sub">Siapa namamu? Biar ucapinnya personal,hihihi</p>
+
+  <div class="name-box">
+    <label for="nameInput">Masukkan namamu</label>
+    <div class="name-input-wrap">
+      <input class="name-input" type="text" id="nameInput" placeholder="Nama kamu..." maxlength="30" autocomplete="off">
+    </div>
+    <p class="err-msg" id="errMsg"></p>
+    <button class="submit-btn" onclick="submitName()">Masuk ✨</button>
+    <p class="hint-note">Nama akan dipakai untuk ucapan personal.<br>aman aja bukan maksud lain.</p>
+  </div>
+</div>
+
+
+<div id="main-content">
+  <nav>
+    <a class="nav-pill active" href="#hero" onclick="smoothNav(event,'hero')">Beranda</a>
+    <a class="nav-pill" href="#eggs" onclick="smoothNav(event,'eggs')">Telur Paskah</a>
+    <a class="nav-pill" href="#verses" onclick="smoothNav(event,'verses')">Firman Tuhan</a>
+  </nav>
+
+  <section id="hero">
+    <p class="hero-eyebrow" id="heroEyebrow">✦ Untuk ... ✦</p>
+    <h1 class="hero-title">Happy<br><span class="acc">Easter</span></h1>
+    <p class="hero-sub" id="heroSub">Selamat Paskah yang penuh sukacita </p>
+    <div class="scroll-hint">Gulir ke bawah</div>
+  </section>
+
+  <section class="content-sec" id="eggs">
+    <p class="sec-label">✦ Interaktif ✦</p>
+    <h2 class="sec-title">Telur <span class="acc">Paskah</span></h2>
+
+    <div id="eggs-main">
+      <div class="msg-box" id="msgBox"><span id="msgText">Ketuk telur satu per satu untuk membuka pesan spesial! 🐣</span></div>
+      <div class="eggs-row" id="eggsRow"></div>
+      <div class="dots" id="dots"></div>
+      <p style="text-align:center;font-size:12px;color:var(--lite);margin-top:12px;letter-spacing:.5px" id="hintText">Buka semua telur untuk hadiah kejutan!</p>
+    </div>
+
+    <div class="final-egg" id="finalEgg">
+      <div class="final-flower">🌷</div>
+      <p class="final-text" id="finalText">...</p>
+      <button class="restart-btn" onclick="restartEggs()">↩ Mulai Lagi</button>
+    </div>
+  </section>
+
+  <section class="content-sec" id="verses">
+    <p class="sec-label">✦ Firman Tuhan ✦</p>
+    <h2 class="sec-title">Ayat <span class="acc">Paskah</span></h2>
+    <div class="verse-nav" id="verseNav"></div>
+    <div class="verse-card" id="verseCard">
+      <div class="vrainbow"></div>
+      <span class="vtag" id="vTag"></span>
+      <p class="vref" id="vRef"></p>
+      <p class="vbody" id="vBody"></p>
+      <div class="vrefl"><p class="refl-label">Renungan</p><p class="refl-body" id="vRefl"></p></div>
+    </div>
+    <div class="varrows">
+      <button class="varr" id="vPrev" onclick="navVerse(-1)">&#8592;</button>
+      <span class="vcounter" id="vCount"></span>
+      <button class="varr" id="vNext" onclick="navVerse(1)">&#8594;</button>
+    </div>
+  </section>
+
+  <footer>
+    Dibuat dengan penuh kasih untuk <span id="footerName">kamu</span> 🌸 Selamat Paskah
+  </footer>
+</div>
+
+<!-- islam PAGE -->
+<div id="muslim-page">
+  <div class="muslim-card">
+    <div class="muslim-emoji">🕌</div>
+    <h2 class="muslim-title" id="muslimTitle">Eh, <span id="muslimName">kamu</span>!</h2>
+    <p class="muslim-roast" id="muslimRoast">"Weh lu islam anjir— tapi ya gapapa sih,<br>penasaran itu wajar hehe 😄"</p>
+    <div class="muslim-msg">
+      Meski beda keyakinan, tetep <strong>Happy Easter</strong> ya buat temen-temen Kristen kita! 🌸<br><br>
+      Semoga kita selalu bisa saling menghargai dan rukun bareng. Paskah atau bukan, persahabatan kita tetep yang terbaik! 💚
+    </div>
+    <button class="back-btn" onclick="goBack()">← Kembali</button>
+  </div>
+</div>
+
+<script>
+/* ── PETALS ── */
+(function(){
+  const cols=['#F4A261','#E76F51','#8ECAE6','#DDA0DD','#A8DADC','#F7CBA0'];
+  for(let i=0;i<20;i++){
+    const p=document.createElement('div');p.className='petal';
+    const w=8+Math.random()*12;
+    p.style.cssText=`left:${Math.random()*100}%;width:${w}px;height:${w*1.5}px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-duration:${5+Math.random()*7}s;animation-delay:${Math.random()*10}s;transform:rotate(${Math.random()*360}deg)`;
+    document.body.appendChild(p);
+  }
+})();
+
+/* ── FILTER ── */
+const BADWORDS = [
+  'anjing','bangsat','kontol','memek','ngentot','brengsek','bajingan','goblok',
+  'tolol','idiot','babi','tai','asu','jancok','cok','pepek','titit','pantek',
+  'keparat','sialan','kampret','jablay','lonte','pelacur','sundel','fuck',
+  'shit','bitch','asshole','bastard','damn','cunt','dick','pussy',
+  'a**ing','b*ngsat','g*blok','t*lol','asu','4su','t0l0l','m3m3k','b4ngs4t','b4ngsat','bangs4t',
+];
+
+const MUSLIM_NAMES = [
+  'muhammad','ahmad','ali','umar','usman','fatimah','aisyah','khadijah',
+  'ibrahim','ismail','idris','yusuf','musa','isa','yahya','zakariya',
+  'abdurrahman','abdullah','abdillah','abdurahman','abdulloh',
+  'nurul','nuraini','nurlita','nurhaliza','nurhasanah','nurlaila',
+  'siti','siti maryam','maryam','mariam',
+  'rizky','rizki','riski','reza','iqbal','farhan','fauzan','fariz',
+  'hafiz','hafizh','hasan','husain','husein','husen',
+  'khairul','khairani','khoirul','khoirani',
+  'zaky','zaki','zikri','zulfa','zulfah','zulham',
+  'annisa','anisa','anis','anissa',
+  'dini','dina','diani','rahma','rahmah','rahmadhani','rahmadani',
+  'fitri','fitria','fitriani','fitra',
+  'hendra','hendi','hendi','hidayat','hidayah',
+  'ikhwan','ikhlas','imron','imran',
+  'laila','lailatul','lailah',
+  'najwa','naila','nayla','nabila','nabilah',
+  'ramadan','ramadhan','ramadan',
+  'salim','salma','salmah','salwa',
+  'taufiq','taufik','taufiqurrahman',
+  'umar','umi','ummu',
+  'wahyu','wahyudi','walid','wulandari',
+  'yanti','yanti','yasmin','yasmeen',
+  'zahra','zahrah','zainab','zainul','zainulhaq',
+  'amir','amirul','amira','amirah',
+  'bagas','bagus','bayu','bayhaqi',
+  'dafa','daffa','danish','daud','dawud',
+  'elsa','elsha',/* common but can be non-muslim */
+  'faisal','faishal','fajar','fajri','fajriah',
+  'ghifari','ghifari','gilang',
+  'hamdan','hamdani','hamid','hamidah',
+  'ilham','ilmi','ilham',
+  'jalal','jalaluddin','jibril',
+  'kamal','kamaluddin','kamila','kamilah',
+  'lutfi','lutfiah','lutfiyah',
+  'muhamad','muhammadiyah',
+  'nadhif','nadhifah','nadila','nadhila',
+  'pasha','fasha',
+  'qodir','qodri','qoirul',
+  'rofiq','rofiqoh','rohim','rahim',
+  'saiful','saifullah','saifudin','saifuddin',
+  'tazkia','tazkirah',
+  'ulfa','ulfah','ulil','ulya',
+  'vivi','vina',/* neutral */
+  'wafa','wafaa','wafi',
+  'yudha','yuda',
+  'zidan','zizan','zidane','wildan','angger','daffa','dafa','yoga','ganes','sandy','sandi','naufal','reyhan','hibatulah','zavier','zacky','wahyu'
+];
+
+function isBad(name) {
+  const n = name.toLowerCase().replace(/\s+/g,'');
+  return BADWORDS.some(w => n.includes(w.replace(/\s/g,'')));
+}
+
+function isMuslim(name) {
+  const n = name.toLowerCase().trim();
+  return MUSLIM_NAMES.some(m => {
+    const parts = n.split(/\s+/);
+    return parts.some(part => part === m) || n.startsWith(m+' ') || n.endsWith(' '+m) || n === m;
+  });
+}
+
+/* ── SUBMIT ── */
+let userName = '';
+
+function submitName() {
+  const inp = document.getElementById('nameInput');
+  const err = document.getElementById('errMsg');
+  const val = inp.value.trim();
+
+  err.textContent = '';
+
+  if (!val) {
+    err.textContent = '⚠ Nama tidak boleh kosong ya!';
+    inp.classList.add('error');
+    setTimeout(()=>inp.classList.remove('error'),400);
+    return;
+  }
+  if (val.length < 2) {
+    err.textContent = '⚠ Nama terlalu pendek nih!';
+    inp.classList.add('error');
+    setTimeout(()=>inp.classList.remove('error'),400);
+    return;
+  }
+  if (isBad(val)) {
+    err.textContent = '🚫 Hei, pakai nama yang baik ya! Jangan asal-asalan 😅';
+    inp.classList.add('error');
+    setTimeout(()=>inp.classList.remove('error'),400);
+    return;
+  }
+
+  userName = val;
+
+  if (isMuslim(val)) {
+    showMuslim(val);
+  } else {
+    showChristian(val);
+  }
+}
+
+document.getElementById('nameInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitName();
+});
+
+/* ── islam ── */
+function showMuslim(name) {
+  document.getElementById('landing').style.display = 'none';
+  const mp = document.getElementById('muslim-page');
+  mp.style.display = 'flex';
+  document.getElementById('muslimName').textContent = name;
+  document.getElementById('muslimTitle').innerHTML = `Eh, <span id="muslimName">${name}</span>!`;
+}
+
+function goBack() {
+  document.getElementById('muslim-page').style.display = 'none';
+  document.getElementById('landing').style.display = 'flex';
+  document.getElementById('nameInput').value = '';
+  document.getElementById('errMsg').textContent = '';
+}
+
+/* ── kristen/katolik── */
+function showChristian(name) {
+  document.getElementById('landing').style.display = 'none';
+  document.getElementById('main-content').style.display = 'block';
+
+  document.getElementById('heroEyebrow').textContent = `✦ Untuk ${name} ✦`;
+  document.getElementById('heroSub').textContent = `Selamat Paskah yang penuh sukacita & berkat, ${name}! 🌸`;
+  document.getElementById('footerName').textContent = name;
+
+  buildEggs(name);
+  buildVerses(name);
+
+  setTimeout(() => {
+    window.scrollTo({top:0,behavior:'instant'});
+    setupNavHighlight();
+  }, 50);
+}
+
+/* ── NAV ── */
+function smoothNav(e, id) {
+  e.preventDefault();
+  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+}
+function setupNavHighlight() {
+  const pills = document.querySelectorAll('.nav-pill');
+  const ids = ['hero','eggs','verses'];
+  window.addEventListener('scroll', () => {
+    let cur = 0;
+    ids.forEach((id,i)=>{
+      const el = document.getElementById(id);
+      if(el && window.scrollY >= el.offsetTop - 90) cur = i;
+    });
+    pills.forEach((p,i)=>p.classList.toggle('active',i===cur));
+  });
+}
+
+/* ── EGGS ── */
+function eggMessages(name) {
+  return [
+    { color1:'#F4A261',color2:'#E76F51',pattern:'zigzag', label:'Harapan', msg:`🌸 ${name}, semoga hari-harimu selalu seindah bunga yang mekar di musim Paskah ini!` },
+    { color1:'#8ECAE6',color2:'#219EBC',pattern:'dots',   label:'Kasih',   msg:`🌊 Setiap hari adalah anugerah baru. Teruslah bersinar, ${name} yang baik hati!` },
+    { color1:'#A8DADC',color2:'#457B9D',pattern:'stripes',label:'Damai',   msg:`🕊️ Paskah mengajarkan kita tentang kebangkitan dan harapan. Selamat Paskah, ${name}!` },
+    { color1:'#DDA0DD',color2:'#9B59B6',pattern:'cross',  label:'Syukur',  msg:`💝 ${name}, semoga berkat Tuhan selalu menyertaimu di setiap langkahmu!` }
+  ];
+}
+
+let crackedCount=0, crackedSet=new Set(), eggData=[];
+
+function eggSVG(d, idx) {
+  const id='e'+idx;
+  let pat='';
+  if(d.pattern==='zigzag') pat=`<polyline points="10,55 20,47 30,55 40,47 50,55 60,47" fill="none" stroke="${d.color2}" stroke-width="3" stroke-linecap="round"/><polyline points="10,65 20,57 30,65 40,57 50,65 60,57" fill="none" stroke="${d.color2}" stroke-width="2.5" stroke-linecap="round"/>`;
+  else if(d.pattern==='dots') [[20,50],[35,43],[50,50],[24,63],[46,63],[35,73]].forEach(([x,y])=>pat+=`<circle cx="${x}" cy="${y}" r="4" fill="${d.color2}" opacity=".75"/>`);
+  else if(d.pattern==='stripes') [45,55,65,75].forEach(y=>pat+=`<line x1="8" y1="${y}" x2="62" y2="${y}" stroke="${d.color2}" stroke-width="3" opacity=".6"/>`);
+  else if(d.pattern==='cross') pat=`<line x1="35" y1="38" x2="35" y2="76" stroke="${d.color2}" stroke-width="4" stroke-linecap="round" opacity=".7"/><line x1="17" y1="57" x2="53" y2="57" stroke="${d.color2}" stroke-width="4" stroke-linecap="round" opacity=".7"/>`;
+  return `<svg class="egg-svg" viewBox="0 0 70 95" xmlns="http://www.w3.org/2000/svg">
+    <defs><clipPath id="cp${id}"><ellipse cx="35" cy="52" rx="28" ry="38"/></clipPath></defs>
+    <ellipse cx="35" cy="52" rx="28" ry="38" fill="${d.color1}"/>
+    <g clip-path="url(#cp${id})">${pat}</g>
+    <ellipse cx="35" cy="52" rx="28" ry="38" fill="none" stroke="${d.color2}" stroke-width="1.8" opacity=".45"/>
+    <ellipse cx="26" cy="36" rx="7" ry="10" fill="white" opacity=".22"/>
+    <g id="${id}-crack" style="display:none"><polyline points="35,14 28,32 37,44 27,56" fill="none" stroke="white" stroke-width="2.5" opacity=".8"/></g>
+  </svg>`;
+}
+
+function buildEggs(name) {
+  eggData = eggMessages(name);
+  crackedCount=0; crackedSet=new Set();
+  const row=document.getElementById('eggsRow'), dotsEl=document.getElementById('dots');
+  row.innerHTML=''; dotsEl.innerHTML='';
+  eggData.forEach((d,i)=>{
+    const w=document.createElement('div');
+    w.className='egg-wrapper';w.id='ew'+i;
+    w.innerHTML=eggSVG(d,i)+`<div class="egg-label">${d.label}</div>`;
+    w.onclick=()=>crackEgg(i);
+    row.appendChild(w);
+    const dot=document.createElement('div');dot.className='dot';dot.id='dot'+i;dotsEl.appendChild(dot);
+  });
+  document.getElementById('finalText').innerHTML=`${name} yang luar biasa,<br>semoga Paskah ini membawa<br><strong>sukacita, kasih</strong>, dan<br>berkat yang tak terhingga untukmu. 🤍`;
+}
+
+function crackEgg(i) {
+  if(crackedSet.has(i)) return;
+  crackedSet.add(i); crackedCount++;
+  const w=document.getElementById('ew'+i);
+  w.classList.add('cracked');w.onclick=null;
+  const ck=document.getElementById('e'+i+'-crack');
+  if(ck)ck.style.display='block';
+  document.getElementById('dot'+i).classList.add('on');
+  const mb=document.getElementById('msgBox'),mt=document.getElementById('msgText');
+  mb.classList.add('lit');mt.style.opacity='0';
+  setTimeout(()=>{mt.textContent=eggData[i].msg;mt.style.transition='opacity .3s';mt.style.opacity='1';},200);
+  burst(w);
+  if(crackedCount===eggData.length) setTimeout(showFinalEgg,900);
+  else document.getElementById('hintText').textContent=`${eggData.length-crackedCount} telur lagi menunggumu! 🐣`;
+}
+
+function burst(anchor) {
+  const r=anchor.getBoundingClientRect();
+  const cx=r.left+r.width/2,cy=r.top+r.height/2;
+  const cols=['#F4A261','#E76F51','#8ECAE6','#DDA0DD','#A8DADC','#FFD700'];
+  for(let i=0;i<16;i++){
+    const c=document.createElement('div');c.className='cf';
+    const a=Math.random()*360,d=55+Math.random()*90;
+    c.style.cssText=`left:${cx+Math.cos(a*Math.PI/180)*d-4}px;top:${cy-10}px;background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:${Math.random()>.5?'50%':'3px'};animation-delay:${Math.random()*.3}s;animation-duration:${1.2+Math.random()*.8}s`;
+    document.body.appendChild(c);setTimeout(()=>c.remove(),2600);
+  }
+}
+
+function showFinalEgg() {
+  document.getElementById('eggs-main').style.display='none';
+  document.getElementById('finalEgg').classList.add('show');
+  for(let i=0;i<32;i++) setTimeout(()=>{
+    const fake={getBoundingClientRect:()=>({left:Math.random()*window.innerWidth,top:window.innerHeight*.45,width:0,height:0})};
+    burst(fake);
+  },i*70);
+}
+
+function restartEggs() {
+  document.getElementById('eggs-main').style.display='';
+  document.getElementById('finalEgg').classList.remove('show');
+  document.getElementById('msgText').textContent='Ketuk telur satu per satu untuk membuka pesan spesial! 🐣';
+  document.getElementById('msgBox').classList.remove('lit');
+  document.getElementById('hintText').textContent='Buka semua telur untuk hadiah kejutan!';
+  buildEggs(userName);
+}
+
+/* ── VERSES ── */
+function verseData(name) {
+  return [
+    {tag:'Kebangkitan',ref:'Yohanes 11:25–26',body:`"Akulah <em>kebangkitan</em> dan <em>hidup</em>; barangsiapa percaya kepada-Ku, ia akan hidup walaupun ia sudah mati."`,refl:`Paskah adalah tentang hidup yang mengalahkan maut. ${name}, Tuhan yang sama itu hadir di hidupmu hari ini.`},
+    {tag:'Kasih Allah', ref:'Yohanes 3:16',   body:`"Karena begitu besar <em>kasih Allah</em> akan dunia ini, sehingga Ia telah mengaruniakan Anak-Nya yang tunggal..."`,refl:`Kasih sebesar ini diberikan cuma-cuma untuk kamu, ${name}. Paskah adalah perayaan kasih yang paling agung.`},
+    {tag:'Hidup Baru',  ref:'Roma 6:4',        body:`"...supaya sama seperti Kristus telah dibangkitkan dari antara orang mati... kita juga akan hidup dalam <em>hidup yang baru</em>."`,refl:`${name}, setiap Paskah adalah undangan untuk memulai hidup yang baru. Semoga kamu merasakan pembaruan itu!`},
+    {tag:'Damai',       ref:'Yohanes 20:19',   body:`"...Yesus datang dan berdiri di tengah-tengah mereka dan berkata: '<em>Damai sejahtera</em> bagi kamu!'"`,refl:`Kata pertama Yesus setelah bangkit adalah damai. Kiranya damai itu juga memenuhi hatimu, ${name}.`},
+    {tag:'Kekuatan',    ref:'Filipi 4:13',     body:`"Segala perkara dapat kutanggung di dalam <em>Dia</em> yang memberi kekuatan kepadaku."`,refl:`${name}, Paskah mengingatkan kita bahwa kita tidak pernah sendiri. Tuhan adalah kekuatanmu setiap hari.`}
+  ];
+}
+
+let vCur=0, verses=[];
+
+function buildVerses(name) {
+  verses=verseData(name);
+  vCur=0;
+  const nav=document.getElementById('verseNav');
+  nav.innerHTML='';
+  verses.forEach((v,i)=>{
+    const b=document.createElement('button');
+    b.className='vtab'+(i===0?' active':'');
+    b.textContent=v.tag;
+    b.onclick=()=>{vCur=i;renderVerse();};
+    nav.appendChild(b);
+  });
+  renderVerse();
+}
+
+function renderVerse() {
+  const v=verses[vCur];
+  document.getElementById('vTag').textContent=v.tag;
+  document.getElementById('vRef').textContent=v.ref;
+  document.getElementById('vBody').innerHTML=v.body;
+  document.getElementById('vRefl').textContent=v.refl;
+  document.getElementById('vCount').textContent=(vCur+1)+' / '+verses.length;
+  document.getElementById('vPrev').disabled=vCur===0;
+  document.getElementById('vNext').disabled=vCur===verses.length-1;
+  document.querySelectorAll('.vtab').forEach((b,i)=>b.classList.toggle('active',i===vCur));
+  const vc=document.getElementById('verseCard');
+  vc.style.opacity='0';vc.style.transform='translateY(10px)';
+  setTimeout(()=>{vc.style.transition='opacity .3s,transform .3s';vc.style.opacity='1';vc.style.transform='translateY(0)';},20);
+}
+
+function navVerse(d) {
+  const n=vCur+d;
+  if(n>=0&&n<verses.length){vCur=n;renderVerse();}
+}
+</script>
+</body>
+</html>
